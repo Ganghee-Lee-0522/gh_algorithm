@@ -1,2 +1,4 @@
 # gh_algorithm
-This is an auto push repository for Baekjoon Online Judge created with [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+This is an auto push repository created by
+- [BaekjoonHub](https://github.com/BaekjoonHub/BaekjoonHub).
+- [LeetHub](chrome-extension://aciombdipochlnkbpcbgdpjffcfdbggi/welcome.html).
