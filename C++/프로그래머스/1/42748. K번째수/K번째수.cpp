@@ -24,13 +24,9 @@ void quickSort(int i, int j, vector<int>& arr) {
 vector<int> solution(vector<int> array, vector<vector<int>> commands) {
     vector<int> answer;
     int times = commands.size();
+    
     for(int idx = 0; idx < times; idx++) {
-        // cout << commands[idx][0] - 1 << ' ' << tmp[commands[idx][0] - 1] << ' ' << tmp[commands[idx][1] - 1] << '\n';
-        // cout << "tmp: ";
-        // for(int p : tmp) {
-        //     cout << p << ' ';
-        // }
-        // cout << '\n';
+        // 배열 초기화
         vector<int> tmp = array;
         // array[]의 commands[idx][0] - 1 인덱스부터 commands[idx][1] - 1 인덱스까지 정렬
         quickSort(commands[idx][0] - 1, commands[idx][1] - 1, tmp);
