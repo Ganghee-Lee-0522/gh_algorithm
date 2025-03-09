@@ -13,7 +13,6 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
         if((100 - progresses[p]) % speeds[p]) cnt++;
         
         d.push(cnt);
-        cout << "p: " << progresses[p] << ", cnt: " << cnt << '\n';
     }
     
     while(!d.empty()) {
