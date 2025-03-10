@@ -12,6 +12,7 @@ int solution(vector<int> priorities, int location) {
     cin.tie(0);
     
     int answer = 0;
+    
     // 큐에 프로세스를 (location, priorities) 쌍으로 삽입
     // priorities 배열을 내림차순 정렬
     // 큐를 돌며 cur의 priorities == priorities [i]이면 pop() 후 answer++, 불일치하면 다시 push()
@@ -31,7 +32,7 @@ int solution(vector<int> priorities, int location) {
         }
         answer++;
         if(cur.X == location) {
-            return answer;
+            break;
         }
     }
     return answer;
