@@ -11,7 +11,7 @@ string solution(vector<string> participant, vector<string> completion) {
     // ums에 남은 선수의 이름을 return
     unordered_multiset<string> ums(participant.begin(), participant.end());
     for(string s : completion) {
-        ums.erase(ums.find(s));
+        ums.erase(ums.find(s)); // ums.erase(s)를 쓰면 중복 포함 모두 삭제 됨!
     }
     answer = *ums.begin();
     return answer;
