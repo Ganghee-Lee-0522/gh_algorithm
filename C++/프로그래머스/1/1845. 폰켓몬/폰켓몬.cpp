@@ -13,10 +13,16 @@ int solution(vector<int> nums)
     // return answer < nums.size() ? answer : nums.size();
     
     /* set 사용 풀이 */
+    // int answer = nums.size() / 2;
+    // set <int> s;
+    // for(int e : nums) {
+    //     s.insert(e);
+    // }
+    // return answer < s.size() ? answer : s.size();
+    
+    /* unordered_set 사용 풀이 */
+    /* 정렬 X, 키 X, only value */
     int answer = nums.size() / 2;
-    set <int> s;
-    for(int e : nums) {
-        s.insert(e);
-    }
-    return answer < s.size() ? answer : s.size();
+    unordered_set<int> us(nums.begin(), nums.end());
+    return answer < us.size() ? answer : us.size();
 }
