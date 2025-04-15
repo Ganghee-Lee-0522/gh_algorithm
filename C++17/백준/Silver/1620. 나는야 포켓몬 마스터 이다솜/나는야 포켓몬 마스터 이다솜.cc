@@ -1,33 +1,31 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
+int main() {
     cin.tie(0);
     ios::sync_with_stdio(0);
     
     int n, m;
-    string title, ip;
+    string st;
     cin >> n >> m;
-    
-    map<string, int> name;
-    vector<string> number(n + 1);
+    unordered_map<string, int> title;
+    unordered_map<int, string> name;
     
     for(int i = 1; i <= n; i++) {
-        cin >> title;
-        name.insert({title, i});
-        number[i] = title;
+        cin >> st;
+        title[st] = i;
+        name[i] = st;
     }
     
     for(int i = 0; i < m; i++) {
-        cin >> ip;
-        if(isdigit(ip[0])) {
-            cout << number[stoi(ip)] << '\n';
+        cin >> st;
+        if(isdigit(st[0])) {
+            cout << name[stoi(st)] << '\n';
         }
         else {
-            cout << name[ip] << '\n';
+            cout << title[st] << '\n';
         }
     }
-
+    
     return 0;
 }
