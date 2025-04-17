@@ -1,13 +1,5 @@
 import java.util.*;
 
-class Pair {
-    int x, y;
-    Pair(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 class Solution {
     public int[] solution(int[] answers) {
         int[] boardA = {5, 1, 2, 3, 4};
