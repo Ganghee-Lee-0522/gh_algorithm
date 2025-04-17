@@ -14,38 +14,26 @@ class Solution {
         int[] boardB = {5, 2, 1, 2, 3, 2, 4, 2};
         int[] boardC = {5, 3, 3, 1, 1, 2, 2, 4, 4, 5};
         int[] cnt = new int[4];
-        List<Integer> answerList = new ArrayList<>();
+        List<Integer> answer = new ArrayList<>();
         
         for(int i = 1; i <= answers.length; i++) {
-            if(answers[i - 1] == boardA[i % 5]) {
+            if(boardA[i % 5] == answers[i - 1]) {
                 cnt[1]++;
             }
-            if(answers[i - 1] == boardB[i % 8]) {
+            if(boardB[i % 8] == answers[i - 1]) {
                 cnt[2]++;
             }
-            if(answers[i - 1] == boardC[i % 10]) {
+            if(boardC[i % 10] == answers[i - 1]) {
                 cnt[3]++;
             }
         }
         
-        if(cnt[1] > cnt[2] && cnt[1] > cnt[3]) {
-            cnt[0] = cnt[1];
-        }
-        else if(cnt[2] > cnt[3]) {
-            cnt[0] = cnt[2];
-        }
-        else {
-            cnt[0] = cnt[3];
-        }
-        
-        int idx = 0;
-        
+        cnt[0] = Math.max(cnt[1], Math.max(cnt[2], cnt[3]));
         for(int i = 1; i <= 3; i++) {
-            if(cnt[i] == cnt[0]) {
-                answerList.add(i);
+            if(cnt[0] == cnt[i]) {
+                answer.add(i);
             }
         }
-        
-        return answerList.stream().mapToInt(i -> i).toArray();
+        return answer.stream().mapToInt(i -> i).toArray();
     }
 }
