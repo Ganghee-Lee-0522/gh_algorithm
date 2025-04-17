@@ -8,7 +8,7 @@ class Solution {
         }
         for(String s : completion) {
             if(map.get(s) > 1) {
-                map.put(s, map.get(s) - 1);
+                map.compute(s, (k, v) -> v == null? 1 : v - 1);
             }
             else {
                 map.remove(s);
