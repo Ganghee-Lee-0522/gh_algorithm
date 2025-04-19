@@ -1,47 +1,39 @@
 import java.util.*;
 
-class Count {
-    String word;
-    int cnt;
-    Count(String word, int cnt) {
-        this.word = word;
-        this.cnt = cnt;
-    }
-}
-
 class Solution {
+    boolean[] visited;
+    int answer = Integer.MAX_VALUE;
+    
     public int solution(String begin, String target, String[] words) {
-        HashMap<String, Integer> board = new HashMap<>();
-        for(int i = 0; i < words.length; i++) {
-            board.put(words[i], 0);
+        visited = new boolean[words.length];
+        dfs(begin, target, words, visited, 0);
+        
+        return answer == Integer.MAX_VALUE ? 0 : answer;
+    }
+    
+    public void dfs(String cur, String target, String[] words, boolean[] visited, int depth) {
+        if(cur.equals(target)) {
+            answer = Math.min(answer, depth);
+            return;
         }
         
-        if(board.get(target) == null) {
-            return 0;
+        for(int nxt = 0; nxt < words.length; nxt++) {
+            if(!visited[nxt] && isPossible(cur, words[nxt])) {
+                visited[nxt] = true;
+                dfs(words[nxt], target, words, visited, depth + 1);
+                visited[nxt] = false;
+            }
         }
-        Queue<Count> queue = new ArrayDeque<>();
-        queue.offer(new Count(begin, 0));
-        while(!queue.isEmpty()) {
-            Count cur = queue.poll();
-            for(int i = 0; i < words.length; i++) {
-                int tmp = 0;
-                if(board.get(words[i]) == 0) {
-                    for(int j = 0; j < begin.length(); j++) {
-                        if(words[i].charAt(j) == cur.word.charAt(j)) {
-                            tmp++;
-                        }
-                    }
-                    if(tmp == cur.word.length() - 1) {
-                        if(words[i].equals(target)) {
-                            return cur.cnt + 1;
-                        }
-                        board.put(words[i], cur.cnt + 1);
-                        queue.offer(new Count(words[i], cur.cnt + 1));
-                    }
-                }
+    }
+    
+    public boolean isPossible(String a, String b) {
+        int diff = 0;
+        for(int i = 0; i < a.length(); i++) {
+            if(a.charAt(i) != b.charAt(i)) {
+                diff++;
             }
         }
         
-        return 0;
+        return diff == 1;
     }
 }
