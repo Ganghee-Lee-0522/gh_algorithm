@@ -3,21 +3,15 @@ import java.util.*;
 class Solution {
     boolean solution(String s) {
         int cnt = 0;
-        
-        for(int i = 0; i < s.length(); i++) {
-            char cur = s.charAt(i);
-            if(cur == 'P' || cur == 'p') {
+        for(char c : s.toCharArray()) {
+            if(c == 'P' || c == 'p') {
                 cnt++;
             }
-            else if(cur == 'Y' || cur == 'y') {
+            else if(c == 'Y' || c == 'y') {
                 cnt--;
             }
         }
         
-        if(cnt == 0) {
-            return true;
-        }
-        
-        return false;
+        return cnt == 0;
     }
 }
