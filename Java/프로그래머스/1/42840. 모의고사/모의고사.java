@@ -2,30 +2,41 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] answers) {
-        int[] boardA = {5, 1, 2, 3, 4};
-        int[] boardB = {5, 2, 1, 2, 3, 2, 4, 2};
-        int[] boardC = {5, 3, 3, 1, 1, 2, 2, 4, 4, 5};
-        int[] cnt = new int[4];
         List<Integer> answer = new ArrayList<>();
         
-        for(int i = 1; i <= answers.length; i++) {
-            if(boardA[i % 5] == answers[i - 1]) {
-                cnt[1]++;
+        int[] supo1 = {5, 1, 2, 3, 4};
+        int[] supo2 = {5, 2, 1, 2, 3, 2, 4, 2};
+        int[] supo3 = {5, 3, 3, 1, 1, 2, 2, 4, 4, 5};
+        
+        int[] grade = {0, 0, 0, 0};
+        
+        for(int idx = 1; idx <= answers.length; idx++) {
+            if(supo1[idx % 5] == answers[idx - 1]) {
+                grade[1]++;
+                if(grade[1] > grade[0]) {
+                    grade[0] = grade[1];
+                }
             }
-            if(boardB[i % 8] == answers[i - 1]) {
-                cnt[2]++;
+            if(supo2[idx % 8] == answers[idx - 1]) {
+                grade[2]++;
+                if(grade[2] > grade[0]) {
+                    grade[0] = grade[2];
+                }
             }
-            if(boardC[i % 10] == answers[i - 1]) {
-                cnt[3]++;
+            if(supo3[idx % 10] == answers[idx - 1]) {
+                grade[3]++;
+                if(grade[3] > grade[0]) {
+                    grade[0] = grade[3];
+                }
+            }            
+        }
+        
+        for(int idx = 1; idx < 4; idx++) {
+            if(grade[0] == grade[idx]) {
+                answer.add(idx);
             }
         }
         
-        cnt[0] = Math.max(cnt[1], Math.max(cnt[2], cnt[3]));
-        for(int i = 1; i <= 3; i++) {
-            if(cnt[0] == cnt[i]) {
-                answer.add(i);
-            }
-        }
         return answer.stream().mapToInt(i -> i).toArray();
     }
 }
