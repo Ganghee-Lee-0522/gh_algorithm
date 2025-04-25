@@ -2,15 +2,17 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] citations) {
-        int h = citations.length;
-        while(h > 0) {
-            int cnt = 0;
-            for(int i : citations) {
-                if(i >= h) {
-                    cnt++;
+        int n = citations.length;
+        int h = n;
+        
+        while(n > 0) {
+            int tmpCnt = 0;
+            for(int cnt : citations) {
+                if(cnt >= h) {
+                    tmpCnt++;
                 }
             }
-            if(cnt >= h) {
+            if(tmpCnt >= h) {
                 return h;
             }
             h--;
