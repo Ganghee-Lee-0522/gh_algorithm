@@ -1,39 +1,56 @@
 import java.util.*;
 
 class Solution {
-    boolean[] visited;
-    int answer = Integer.MAX_VALUE;
+    int answer = 0;
     
     public int solution(String begin, String target, String[] words) {
-        visited = new boolean[words.length];
-        dfs(begin, target, words, visited, 0);
+        boolean[] visited = new boolean[words.length];
+        Set<String> set = new HashSet<>();
+        for(String s : words) {
+            set.add(s);
+        }
+        if(!set.contains(target)) {
+            return answer;
+        }
+        dfs(0, begin, target, words, visited);
         
-        return answer == Integer.MAX_VALUE ? 0 : answer;
+        return answer;
     }
     
-    public void dfs(String cur, String target, String[] words, boolean[] visited, int depth) {
+    public void dfs(int depth, String cur, String target, String[] words, boolean[] visited) {
         if(cur.equals(target)) {
-            answer = Math.min(answer, depth);
+            if(answer == 0) {
+                answer = depth;
+            }
+            else {
+                answer = Math.min(answer, depth);
+            }
+        }
+        if(depth == words.length) {
             return;
         }
         
-        for(int nxt = 0; nxt < words.length; nxt++) {
-            if(!visited[nxt] && isPossible(cur, words[nxt])) {
-                visited[nxt] = true;
-                dfs(words[nxt], target, words, visited, depth + 1);
-                visited[nxt] = false;
+        for(int idx = 0; idx < words.length; idx++) {
+            if(!visited[idx] && isPossible(cur, words[idx])) {
+                visited[idx] = true;
+                dfs(depth + 1, words[idx], target, words, visited);
+                visited[idx] = false;
             }
         }
     }
     
     public boolean isPossible(String a, String b) {
-        int diff = 0;
-        for(int i = 0; i < a.length(); i++) {
-            if(a.charAt(i) != b.charAt(i)) {
-                diff++;
+        int size = a.length();
+        int cnt = 0;
+        for(int idx = 0; idx < size; idx++) {
+            if(a.charAt(idx) == b.charAt(idx)) {
+                cnt++;
             }
         }
+        if(cnt == size - 1) {
+            return true;
+        }
         
-        return diff == 1;
+        return false;
     }
 }
