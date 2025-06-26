@@ -1,22 +1,22 @@
 class Solution {
     public int solution(String s) {
         int answer = s.length();
-        for(int leng = 1; leng <= s.length() / 2; leng++) {
-            String prev = s.substring(0, leng);
-            StringBuilder sb = new StringBuilder();
+        for(int unit = 1; unit <= s.length() / 2; unit++) {
             int cnt = 1;
-            for(int i = leng; i < s.length(); i += leng) {
-                String cur = i + leng <= s.length() ? s.substring(i, i + leng) : s.substring(i);
-                if(cur.equals(prev)) {
+            String prev = s.substring(0, unit);
+            StringBuilder sb = new StringBuilder();
+            for(int i = unit; i <= s.length(); i += unit) {
+                String cur = i + unit <= s.length() ? s.substring(i, i + unit) : s.substring(i);
+                if(prev.equals(cur)) {
                     cnt++;
                 }
                 else {
                     if(cnt > 1) {
                         sb.append(cnt);
                     }
+                    cnt = 1;
                     sb.append(prev);
                     prev = cur;
-                    cnt = 1;
                 }
             }
             if(cnt > 1) {
